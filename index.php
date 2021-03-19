@@ -110,16 +110,21 @@ $jsonget = json_decode(file_get_contents($url),true);
         $bed_size = $jsonget["data"][$i]["bed_size"];
         $cost = $jsonget["data"][$i]["cost"];
         $status = $jsonget["data"][$i]["status"];
+
       echo "<td>".($i+1)."</td>";
       echo "<td>".$room."</td>";
       echo "<td>".$bed_size."</td>";
-      echo "<td>".$cost."</td>";
+      echo "<td>".$cost." $"."</td>";
+
       if($status=='available'){
-      echo "<td style=".'"'."color: #00FF0E".'"'."><a href=deactiveroom.php?&room=".$room.">".$status."</a></td>";}
+      echo "<td><a href=occupy.php?&room=".$room." style=".'"'."color: #00FF0E".'"'.">".$status."</a></td>";}
       elseif($status=='occupy'){
-        echo "<td style=".'"'."color: #FF0000".'"'."><a href=activeroom.php?&room=".$room.">".$status."</a></td>";}
-        else{echo "<td style=".'"'."color: #00FF0E".'"'."><a href=deactiveroom.php?room=".$room.">available</a></td>";}
-      echo "</tr>";
+        echo "<td><a href=available.php?&room=".$room." style=".'"'."color: #FF0000".'"'.">".$status."</a></td>";}
+        else{echo "<td><a href=occupy.php?room=".$room." style=".'"'."color: #00FF0E".'"'.">available</a></td>";}
+        
+        echo "<td><a href=deleteRoom.php?room=".$room." style=".'"'."color: #BD4747".'"'.">Delete</a></td>";
+      
+        echo "</tr>";
     }
       ?>
     </tr>
